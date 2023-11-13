@@ -1,0 +1,11 @@
+#ignore especific files
+HELP.md
+.classpath
+
+mvnw.cmd
+
+#ignore entire directories
+target/
+mvnw/
+.mvn/
+.settings/
