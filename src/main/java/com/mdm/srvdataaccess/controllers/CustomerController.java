@@ -1,12 +1,14 @@
 package com.mdm.srvdataaccess.controllers;
 
 import java.rmi.ServerException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,15 @@ public class CustomerController {
 	@GetMapping(path="/allcustomers")
 	public @ResponseBody Iterable<Customer> getAllCustomers(){
 		return customerRepository.findAll();
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@GetMapping(path="/getCustomer/{customerId}")
+	public ResponseEntity<Customer> getCustomerId(@PathVariable int customerId  ){
+		System.out.println("getCustomerbyId...");
+		Optional<Customer> custom = customerRepository.findById(customerId);
+		
+		return new ResponseEntity( custom, HttpStatus.OK );
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
